@@ -1,0 +1,14 @@
+{
+  "name": "pink-paradise-shop",
+  "version": "1.0.0",
+  "description": "Pink Paradise Shop with Stripe Test Mode",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "express": "^4.19.2",
+    "stripe": "^14.21.0"
+  }
+}

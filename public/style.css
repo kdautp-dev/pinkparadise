@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Daydream&family=Merriweather:wght@300;400;700&display=swap');
+
+:root {
+  --accent: #f7c9d6; /* light pink accent */
+  --accent-pale: #fff5f8; /* very pale pink */
+  --accent-disabled: #fdeaf1;
+  --bg: #ffffff; /* main background */
+  --text: #332a2a;
+}
+
+/* General */
+body {
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  padding: 1.25rem;
+  color: var(--text);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.top-bar .logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Logo text uses the Daydream display font */
+.top-bar .logo .logo-text {
+  font-family: 'Daydream', cursive;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
+  display: inline-block;
+}
+
+@media (max-width: 520px) {
+  .top-bar .logo .logo-text { font-size: 1.4rem; }
+}
+
+.top-bar button {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 0;
+  font-size: 1.1rem;
+  font-family: inherit; /* inherit the site serif */
+}
+
+/* Buttons across the site inherit the site font for consistency */
+button {
+  font-family: inherit;
+}
+
+/* Side Menu Drawer (Left) */
+.menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0; /* aligned to left, hidden via transform */
+  width: 250px;
+  height: 100%;
+  background: var(--accent-pale);
+  padding: 1rem;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%); /* fully hidden off-screen */
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  pointer-events: none; /* disable interactions when hidden */
+}
+
+.menu-drawer.show {
+  transform: translateX(0); /* visible */
+  box-shadow: 2px 0 12px rgba(0,0,0,0.2); /* only when visible */
+  pointer-events: auto;
+}
+
+.menu-drawer #close-menu {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.menu-drawer nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.menu-drawer nav li {
+  margin-bottom: 1rem;
+}
+
+.menu-drawer nav a {
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Banner */
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Featured Products */
+.featured-products {
+  padding: 1rem;
+}
+
+.featured-products h2 {
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.products-grid {
+  display: grid;
+  /* fixed column width so single items don't stretch */
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 1rem;
+  justify-content: center; /* center the grid when there are few items */
+  align-content: start;
+}
+
+.product {
+  width: 220px; /* ensure consistent card width */
+  min-height: 260px; /* keep cards the same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Mobile fallback: allow cards to be fluid on narrow screens */
+@media (max-width: 520px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    justify-content: center;
+  }
+  .product {
+    width: auto;
+    min-height: auto;
+  }
+}
+
+/* Product Card */
+.product {
+  background: white;
+  padding: 1rem;
+  border-radius: 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.menu-icon{
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  vertical-align: middle;
+} 
+.product button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0;
+  margin-top: 8px;
+}
+
+#cart h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.cart-controls button {
+  padding: 4px 8px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+/* Cart Drawer (Right) */
+#cart {
+  position: fixed;
+  top: 0;
+  right: -360px;
+  width: 320px;
+  height: 100%;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.2);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease;
+}
+
+#cart.show {
+  right: 0;
+}
+
+#cart #close-cart {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#cart h2 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.cart-item {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.cart-item-title {
+  font-weight: bold;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.cart-controls button {
+  padding: 4px 8px;
+  border: none;
+  background: rgb(252, 232, 242);
+  color: white;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.remove-btn {
+  background: #ddd;
+  color: #333;
+}
+
+.cart-footer {
+  margin-top: auto;
+}
+
+.cart-total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.checkout-btn:disabled {
+  background: var(--accent-disabled);
+  cursor: not-allowed;
+}
+
+.empty-cart {
+  color: #888;
+  text-align: center;
+  margin-top: 40px;
+}

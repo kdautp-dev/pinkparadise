@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All - Pink Paradise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <button id="menu-btn">☰</button>
+  <div class="logo"> <span class="logo-text">Pink Paradise</span></div>
+  <button id="cart-btn" onclick="toggleCart()"><img src="images/bag-icon.png" alt="Cart" class="icon"> Cart (<span id="cart-count">0</span>)</button>
+</header>
+
+<!-- Side Menu Drawer (Left) -->
+<aside id="menu" class="menu-drawer">
+  <button id="close-menu" onclick="toggleMenu()">✕</button>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop All</a></li>
+      <li><a href="#" onclick="showCategory('Clothing')">Tops</a></li>
+      <li><a href="#" onclick="showCategory('Accessories')">Bottoms</a></li>
+      <li><a href="#" onclick="showCategory('Beauty')">Accessories</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Page Heading -->
+<section class="page-heading">
+  <h1 style="text-align:center; color:rgb(255, 220, 238); margin:1rem 0;">Shop All</h1>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-products">
+  <div id="products" class="products-grid"></div>
+</section>
+
+<!-- Cart Drawer (Right) -->
+<aside id="cart">
+  <button id="close-cart" onclick="toggleCart()">✕</button>
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: <span id="cart-total">$0.00</span>
+    </div>
+    <button id="checkout-btn" class="checkout-btn" onclick="checkout()" disabled>
+      Checkout
+    </button>
+  </div>
+</aside>
+
+<script src="app.js"></script>
+</body>
+</html>
